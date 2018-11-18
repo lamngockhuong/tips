@@ -166,6 +166,8 @@ P.S: All these commands are tested on `git version 2.7.4 (Apple Git-66)`.
 * [Show git status short](#show-git-status-short)
 * [Checkout a commit prior to a day ago](#checkout-a-commit-prior-to-a-day-ago)
 * [Push a new local branch to remote repository and track](#push-a-new-local-branch-to-remote-repository-and-track)
+* [Change a branch base](#change-a-branch-base)
+* [Use SSH instead of HTTPs for remotes](#use-ssh-instead-of-https-for-remotes)
 
 <!-- Don’t remove or change the comment below – that can break automatic updates. More info at <http://npm.im/doxie.inject>. -->
 <!-- @doxie.inject end toc -->
@@ -665,6 +667,11 @@ __Alternatives:__
 gitk --all
 ```
 
+
+```sh
+git log --graph --pretty=format:'%C(auto) %h | %s | %an | %ar%d'
+```
+
 ## Deploying git tracked subfolder to gh-pages
 ```sh
 git subtree push --prefix subfolder_name origin gh-pages
@@ -978,7 +985,13 @@ git log --all --grep='<given-text>'
 
 ## Get first commit in a branch (from master)
 ```sh
-git log master..<branch-name> --oneline | tail -1
+git log --oneline master..<branch-name> | tail -1
+```
+
+
+__Alternatives:__
+```sh
+git log --reverse master..<branch-name> | head -6
 ```
 
 ## Unstaging Staged file
@@ -1160,6 +1173,16 @@ git checkout master@{yesterday}
 ## Push a new local branch to remote repository and track
 ```sh
 git push -u origin <branch_name>
+```
+
+## Change a branch base
+```sh
+git rebase --onto <new_base> <old_base>
+```
+
+## Use SSH instead of HTTPs for remotes
+```sh
+git config --global url.'git@github.com:'.insteadOf 'https://github.com/'
 ```
 
 <!-- Don’t remove or change the comment below – that can break automatic updates. More info at <http://npm.im/doxie.inject>. -->
